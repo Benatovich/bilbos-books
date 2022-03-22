@@ -27,4 +27,16 @@ describe('bilbos-books routes', () => {
       pob: 'Portland, OR',
     });
   });
+
+  it('should be able to get all instances of Author from authors', async () => {
+    const author = await Author.insert({
+      name: 'Chuck Palahniuk',
+      dob: '4/3/1992',
+      pob: 'Portland, OR',
+    });
+
+    const res = await request(app).get('/api/v1/authors');
+
+    expect(res.body).toEqual([{ ...author }]);
+  });
 });
