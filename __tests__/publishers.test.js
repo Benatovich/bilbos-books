@@ -37,11 +37,15 @@ describe('bilbos-books routes', () => {
     const res = await request(app)
       .get('/api/v1/publishers');
 
-    expect(res.body).toEqual(
-      await Publisher.getAll()
-    );
+    expect(res.body).toEqual([{
+      publisher_id: expect.any(String),
+      name: 'Hank',
+    }]);
   });
 
+  it('gets a publisher by id', async () => {
+    
+  })
 
 
 });
