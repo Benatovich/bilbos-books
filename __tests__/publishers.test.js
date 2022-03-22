@@ -44,8 +44,12 @@ describe('bilbos-books routes', () => {
   });
 
   it('gets a publisher by id', async () => {
-    
-  })
+    const expected = await Publisher.insert({ name: 'Hank', city: 'Buffalo', state: 'New York', country: 'US' });
+    const res = await request(app)
+      .get(`/api/v1/publishers/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 
 
 });
