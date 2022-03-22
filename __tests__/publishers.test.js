@@ -14,42 +14,51 @@ describe('bilbos-books routes', () => {
   });
 
   it('creates a new entry in the publishers table', async () => {
-    const res = await request(app)
-      .post('/api/v1/publishers')
-      .send({
-        name: 'Jeff',
-        city: 'Buffalo',
-        state: 'New York',
-        country: 'US'
-      });
+    const res = await request(app).post('/api/v1/publishers').send({
+      name: 'Jeff',
+      city: 'Buffalo',
+      state: 'New York',
+      country: 'US',
+    });
 
     expect(res.body).toEqual({
       publisher_id: expect.any(String),
       name: 'Jeff',
       city: 'Buffalo',
       state: 'New York',
-      country: 'US'
+      country: 'US',
     });
   });
 
   it('gets a list of publishers', async () => {
-    await Publisher.insert({ name: 'Hank', city: 'Buffalo', state: 'New York', country: 'US' });
-    const res = await request(app)
-      .get('/api/v1/publishers');
-
-    expect(res.body).toEqual([{
-      publisher_id: expect.any(String),
+    await Publisher.insert({
       name: 'Hank',
-    }]);
+      city: 'Buffalo',
+      state: 'New York',
+      country: 'US',
+    });
+    const res = await request(app).get('/api/v1/publishers');
+
+    expect(res.body).toEqual([
+      {
+        publisher_id: expect.any(String),
+        name: 'Hank',
+      },
+    ]);
   });
 
   it('gets a publisher by id', async () => {
-    const expected = await Publisher.insert({ name: 'Hank', city: 'Buffalo', state: 'New York', country: 'US' });
-    const res = await request(app)
-      .get(`/api/v1/publishers/${expected.id}`);
+    const expected = await Publisher.insert({
+      name: 'Hank',
+      city: 'Buffalo',
+      state: 'New York',
+      country: 'US',
+    });
+
+    const res = await request(app).get(
+      `/api/v1/publishers/${expected.publisher_id}`
+    );
 
     expect(res.body).toEqual(expected);
   });
-
-
 });
