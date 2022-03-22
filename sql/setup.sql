@@ -22,12 +22,40 @@ DROP TABLE IF EXISTS authors_book;
 
 CREATE TABLE authors_book (
 book_id BIGINT,
-author_id BIGINT
-FOREIGN KEY (book_id) REFERENCES book (book_id)
+author_id BIGINT,
+FOREIGN KEY (book_id) REFERENCES book (book_id),
 FOREIGN KEY (author_id) REFERENCES author (author_id)
 
 );
 
+DROP TABLE IF EXISTS publishers;
+
+CREATE TABLE publishers (
+publisher_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+name TEXT NOT NULL,
+city TEXT,
+state TEXT,
+country TEXT
+);
+
+DROP TABLE IF EXISTS review;
+
+CREATE TABLE review (
+review_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+reviewer_id BIGINT,
+book_id BIGINT NOT NULL,
+rating SMALLINT NOT NULL,
+CONSTRAINT rating CHECK (rating BETWEEN 1 AND 5),
+review VARCHAR (140) NOT NULL
+);
+
+DROP TABLE IF EXISTS reviewer;
+
+CREATE TABLE reviewer (
+reviewer_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+name TEXT NOT NULL,
+company TEXT NOT NULL
+);
 
 
 
