@@ -21,11 +21,8 @@ pob TEXT
 DROP TABLE IF EXISTS authors_book;
 
 CREATE TABLE authors_book (
-book_id BIGINT,
-author_id BIGINT,
-FOREIGN KEY (book_id) REFERENCES book (book_id),
-FOREIGN KEY (author_id) REFERENCES author (author_id)
-
+book_id BIGINT REFERENCES book(book_id),
+author_id BIGINT REFERENCES author(author_id)
 );
 
 DROP TABLE IF EXISTS publisher;
@@ -59,3 +56,12 @@ company TEXT NOT NULL
 
 
 
+INSERT INTO 
+  author (name, dob, pob)
+VALUES
+  ('ryan', '4/3/1992', 'portland');
+
+INSERT INTO
+  book (publisher_id, title, released)
+VALUES
+  ('1', 'hi', 1922);

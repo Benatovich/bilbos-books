@@ -31,12 +31,14 @@ describe('bilbos-books routes', () => {
   });
 
   it('gets a list of publishers', async () => {
+    //TODO: account for books
     await Publisher.insert({
       name: 'Hank',
       city: 'Buffalo',
       state: 'New York',
       country: 'US',
     });
+
     const res = await request(app).get('/api/v1/publishers');
 
     expect(res.body).toEqual([
