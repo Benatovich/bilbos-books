@@ -31,4 +31,17 @@ describe('bilbos-books routes', () => {
       country: 'US'
     });
   });
+
+  it('gets a list of publishers', async () => {
+    await Publisher.insert({ name: 'Hank', city: 'Buffalo', state: 'New York', country: 'US' });
+    const res = await request(app)
+      .get('/api/v1/publishers');
+
+    expect(res.body).toEqual(
+      await Publisher.getAll()
+    );
+  });
+
+
+
 });
