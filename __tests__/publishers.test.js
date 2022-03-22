@@ -53,6 +53,12 @@ describe('bilbos-books routes', () => {
       city: 'Buffalo',
       state: 'New York',
       country: 'US',
+      // books: [
+      //   {
+      //     book_id: 1,
+      //     title: 'book',
+      //   },
+      // ],
     });
 
     const res = await request(app).get(
