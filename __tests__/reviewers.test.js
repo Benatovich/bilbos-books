@@ -14,16 +14,37 @@ describe('bilbos-books routes', () => {
   });
 
   it('creates a reviewer', async () => {
-      const reviewer = ({ 
-          name: 'Ernie',
-          company: 'Good Books'
-      });
+    const reviewer = ({
+      name: 'Ernie',
+      company: 'Good Books'
+    });
 
-      const res  = await request(app)
-        .post('/api/v1/reviewers')
-        .send(reviewer);
+    const res = await request(app)
+      .post('/api/v1/reviewers')
+      .send(reviewer);
 
-    expect(res.body).toEqual({reviewer_id: expect.any(String), ...reviewer});
-  })
+    expect(res.body).toEqual({ reviewer_id: expect.any(String), ...reviewer });
+  });
+
+
+  it('gets all reviewers', async () => {
+    const reviewer = await Reviewer.insert({
+      name: 'Olivia',
+      company: 'All the Books'
+    });
+
+    const res = await request(app)
+      .get('/api/v1/reviewers');
+
+    expect(res.body).toEqual([{ 
+      reviewer_id: expect.any(String),
+      name: 'Denzel',
+      company: 'Most Books'
+    }, { ...reviewer }]);
+
+  });
 
 });
+
+
+
