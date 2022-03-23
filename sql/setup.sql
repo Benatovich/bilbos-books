@@ -65,3 +65,8 @@ INSERT INTO
   book (publisher_id, title, released)
 VALUES
   ('1', 'hi', 1922);
+
+INSERT INTO
+  reviewer (name, company)
+VALUES
+  ('Denzel', 'Most Books');
