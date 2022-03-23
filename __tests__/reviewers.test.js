@@ -44,6 +44,17 @@ describe('bilbos-books routes', () => {
 
   });
 
+  //   it('updates reviewer', async () => {
+  //     const reviewer = await Reviewer.insert({
+  //       name: 'Ryan', 
+  //       company: 'One Book'
+  //     });
+
+  //     const res = await request(app)
+  //         .patch(`/api/v1/${reviewer.reviewer_id}`)
+  //         .
+  //   })
+
 });
 
 
