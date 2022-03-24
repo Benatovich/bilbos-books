@@ -50,6 +50,7 @@ describe('bilbos-books routes', () => {
         const res2 = await request(app)
         .get(`/api/v1/reviews`);
       expect(res2.body.length).toEqual(100);
+      expect(res2.body.length).not.toEqual(105);
     });
 
 });
