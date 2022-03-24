@@ -56,6 +56,7 @@ company TEXT NOT NULL
 
 
 
+
 INSERT INTO 
   author (name, dob, pob)
 VALUES
@@ -70,3 +71,18 @@ INSERT INTO
   reviewer (name, company)
 VALUES
   ('Denzel', 'Most Books');
+
+INSERT INTO
+  publisher (name, city, state, country)
+VALUES
+  ('sam', 'buffalo', 'ny', 'us');
+
+INSERT INTO
+  review (rating, reviewer_id, review, book_id)
+VALUES
+  (1, 1, 'nice', 1);
+
+INSERT INTO
+  authors_book (author_id, book_id)
+VALUES
+  (1, 1)
