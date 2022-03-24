@@ -52,7 +52,7 @@ describe('bilbos-books routes', () => {
   it('gets a book by id', async () => {
     const book = await Book.insert({
       title: 'Test',
-      publisher_id: '90',
+      publisher_id: 1,
       released: 1995
     });
 

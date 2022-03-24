@@ -34,8 +34,8 @@ describe('bilbos-books routes', () => {
     //TODO: account for books
     await Publisher.insert({
       name: 'Hank',
-      city: 'Buffalo',
-      state: 'New York',
+      city: 'austin',
+      state: 'texas',
       country: 'US',
     });
 
@@ -44,8 +44,12 @@ describe('bilbos-books routes', () => {
     expect(res.body).toEqual([
       {
         publisher_id: expect.any(String),
-        name: 'Hank',
+        name: 'sam'
       },
+      {
+        publisher_id: expect.any(String),
+        name: 'Hank'
+      }
     ]);
   });
 
