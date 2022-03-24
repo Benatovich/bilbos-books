@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Review = require('../lib/models/Review');
+const { getAll } = require('../lib/models/Publisher');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -50,7 +51,25 @@ describe('bilbos-books routes', () => {
         const res2 = await request(app)
         .get(`/api/v1/reviews`);
       expect(res2.body.length).toEqual(100);
-      expect(res2.body.length).not.toEqual(105);
+      expect(res2.body.length).not.toBeGreaterThan(100);
     });
+
+    it('should be able to delete reviews', async () => {
+      const review = await Review.insert({ 
+        reviewer_id: '2',
+        book_id: '4',
+        rating: 3,
+        review: 'This book was mid :/'});
+
+        const getAllReviews = await Review.getAll();
+    
+    const res = await request(app)
+    .delete(`/api/v1/reviews/${review.review_id}`);
+
+    expect(res.body).toEqual(review);
+    const getAll2 = await Review.getAll()
+    expect(getAll2.length).toEqual(getAllReviews.length - 1);
+    
+    })
 
 });
