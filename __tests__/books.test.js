@@ -53,14 +53,26 @@ describe('bilbos-books routes', () => {
   });
 
   it('gets a book by id', async () => {
-    const book = await Book.insert({
-      title: 'Fight Club',
+    // const book = await Book.insert({
+    //   title: 'Fight Club',
+    //   publisher_id: '1',
+    //   released: 2020,
+    // });
+    // const book = await Book.getById(1);
+
+    const res = await request(app).get(`/api/v1/books/1`);
+
+    expect(res.body).toEqual({
+      book_id: '1',
+      title: 'hi',
+      released: 1922,
       publisher_id: '1',
-      released: 2020,
+      author: [
+        {
+          author_id: '1',
+          name: 'ryan',
+        },
+      ],
     });
-
-    const res = await request(app).get(`/api/v1/books/${book.book_id}`);
-
-    expect(res.body).toEqual(book);
   });
 });

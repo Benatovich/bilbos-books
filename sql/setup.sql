@@ -85,4 +85,4 @@ VALUES
 INSERT INTO
   authors_book (author_id, book_id)
 VALUES
-  (1, 1)
+  (1, 1);
