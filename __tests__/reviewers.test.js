@@ -84,10 +84,19 @@ describe('bilbos-books routes', () => {
     );
   });
 
-  it('updates reviewer', async () => {
+  it.only('updates reviewer', async () => {
+    // insert a Reviewer whose reviewer_id should be 3
     const reviewer = await Reviewer.insert({
       name: 'Ryan',
       company: 'One Book'
+    });
+    
+    // insert a Review with a review_id of 2, book_id 1 should have the title "hi"
+    await Review.insert({
+      reviewer_id: '3',
+      book_id: '1',
+      rating: 3,
+      review: 'okay',
     });
 
     const res = await request(app)
@@ -95,16 +104,16 @@ describe('bilbos-books routes', () => {
       .send({
         company: 'Two Books'
       });
-   
+    
     const expected = {
       reviewer_id: expect.any(String),
       name: 'Ryan',
       company: 'Two Books',
       review: [{
-        review_id: '2',
+        review_id: '3',
+        book_id: '1',
         rating: 3,
         review: 'okay',
-        book_id: '1',
         title: 'hi'
       }]
 
