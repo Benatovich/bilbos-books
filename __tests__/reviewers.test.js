@@ -39,6 +39,11 @@ describe('bilbos-books routes', () => {
         name: 'Denzel',
         company: 'Most Books',
       },
+      {
+        reviewer_id: expect.any(String),
+        name: 'Jeff',
+        company: 'No Books'
+      },
       { ...reviewer },
     ]);
   });
@@ -84,7 +89,7 @@ describe('bilbos-books routes', () => {
     );
   });
 
-  it.only('updates reviewer', async () => {
+  it('updates reviewer', async () => {
     // insert a Reviewer whose reviewer_id should be 3
     const reviewer = await Reviewer.insert({
       name: 'Ryan',
