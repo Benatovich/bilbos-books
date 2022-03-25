@@ -116,4 +116,19 @@ describe('bilbos-books routes', () => {
 
     expect(response2.body).toEqual(expected);
   });
+
+  it('deletes a reviewer if they have no reviews', async () => {
+    const reviewer = await Reviewer.insert({
+      name: 'Beth',
+      company: 'Books for Cats'
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/reviewers/${reviewer.reviewer_id}`);
+
+
+    expect(res.body).toEqual(reviewer);
+    expect(await Reviewer.getById(reviewer.reviewer_id)).toBeNull();
+
+  });
 });
