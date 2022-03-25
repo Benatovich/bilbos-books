@@ -57,7 +57,7 @@ describe('bilbos-books routes', () => {
     for (let i = 0; i < 101; i++) {
       await Review.insert({
         reviewer_id: '3',
-        book_id: '2',
+        book_id: '1',
         rating: 2,
         review: 'This book sucked! Boo :(',
       });
