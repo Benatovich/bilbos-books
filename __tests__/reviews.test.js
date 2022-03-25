@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Review = require('../lib/models/Review');
-const { getAll } = require('../lib/models/Publisher');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -39,6 +38,13 @@ describe('bilbos-books routes', () => {
 
     expect(res.body).toEqual([
       { ...review },
+      {
+        review_id: expect.any(String),
+        rating: 3,
+        reviewer_id: '2',
+        review: 'okay',
+        book_id: '1',
+      },
       {
         review_id: expect.any(String),
         rating: 1,

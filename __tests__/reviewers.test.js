@@ -53,7 +53,7 @@ describe('bilbos-books routes', () => {
       rating: 5,
       review: 'book slaps',
       book_id: '1',
-      book_title: 'The Communist Manifesto',
+      book_title: 'hi',
       reviewer_id: reviewer.reviewer_id,
     });
 
@@ -61,13 +61,25 @@ describe('bilbos-books routes', () => {
       `/api/v1/reviewers/${reviewer.reviewer_id}`
     );
 
-    expect(res.body).toEqual([
+    expect(res.body).toEqual(
       {
+        name: 'Sam',
+        company: 'No Books',
         reviewer_id: expect.any(String),
-        ...reviewer,
-        ...review,
+        reviews: [{
+          rating: 3,
+          review: 'okay',
+          book_id: '1',
+          title: 'hi'
+        },
+        {
+          rating: 5,
+          review: 'book slaps',
+          book_id: '1',
+          title: 'hi'
+        }]
       },
-    ]);
+    );
   });
 
   //   it('updates reviewer', async () => {
