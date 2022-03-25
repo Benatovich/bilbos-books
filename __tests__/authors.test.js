@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Author = require('../lib/models/Author');
+const Book = require('../lib/models/Book');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -54,6 +55,11 @@ describe('bilbos-books routes', () => {
       name: 'Chuck Palahniuk',
       dob: '4/3/1992',
       pob: 'Portland, OR',
+    });
+
+    await Book.insert({
+      title: 'fight club',
+      released: 1996
     });
 
     const res = await request(app).get(`/api/v1/authors/${author.author_id}`);
