@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Book = require('../lib/models/Book');
-const { insert } = require('../lib/models/Publisher');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -53,7 +52,7 @@ describe('bilbos-books routes', () => {
   });
 
   it('gets a book by id', async () => {
-    const res = await request(app).get(`/api/v1/books/1`);
+    const res = await request(app).get('/api/v1/books/1');
 
     expect(res.body).toEqual({
       book_id: '1',

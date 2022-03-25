@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Review = require('../lib/models/Review');
-const { getAll } = require('../lib/models/Publisher');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -41,6 +40,13 @@ describe('bilbos-books routes', () => {
       { ...review },
       {
         review_id: expect.any(String),
+        rating: 3,
+        reviewer_id: '2',
+        review: 'okay',
+        book_id: '1',
+      },
+      {
+        review_id: expect.any(String),
         rating: 1,
         reviewer_id: '1',
         review: 'nice',
@@ -51,7 +57,7 @@ describe('bilbos-books routes', () => {
     for (let i = 0; i < 101; i++) {
       await Review.insert({
         reviewer_id: '3',
-        book_id: '2',
+        book_id: '1',
         rating: 2,
         review: 'This book sucked! Boo :(',
       });
