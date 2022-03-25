@@ -53,13 +53,6 @@ describe('bilbos-books routes', () => {
   });
 
   it('gets a book by id', async () => {
-    // const book = await Book.insert({
-    //   title: 'Fight Club',
-    //   publisher_id: '1',
-    //   released: 2020,
-    // });
-    // const book = await Book.getById(1);
-
     const res = await request(app).get(`/api/v1/books/1`);
 
     expect(res.body).toEqual({
