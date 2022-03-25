@@ -49,7 +49,7 @@ describe('bilbos-books routes', () => {
       company: 'No Books',
     });
 
-    const review = await Review.insert({
+    await Review.insert({
       rating: 5,
       review: 'book slaps',
       book_id: '1',
@@ -84,14 +84,36 @@ describe('bilbos-books routes', () => {
     );
   });
 
-  //   it('updates reviewer', async () => {
-  //     const reviewer = await Reviewer.insert({
-  //       name: 'Ryan',
-  //       company: 'One Book'
-  //     });
+  it('updates reviewer', async () => {
+    const reviewer = await Reviewer.insert({
+      name: 'Ryan',
+      company: 'One Book'
+    });
 
-  //     const res = await request(app)
-  //         .patch(`/api/v1/${reviewer.reviewer_id}`)
-  //         .
-  //   })
+    const res = await request(app)
+      .patch(`/api/v1/reviewers/${reviewer.reviewer_id}`)
+      .send({
+        company: 'Two Books'
+      });
+   
+    const expected = {
+      reviewer_id: expect.any(String),
+      name: 'Ryan',
+      company: 'Two Books',
+      review: [{
+        review_id: '2',
+        rating: 3,
+        review: 'okay',
+        book_id: '1',
+        title: 'hi'
+      }]
+
+    };
+      
+    expect(res.body).toEqual(expected);
+    const response2 = await request(app)
+      .get(`/api/v1/reviewers/${reviewer.reviewer_id}`);
+
+    expect(response2.body).toEqual(expected);
+  });
 });
