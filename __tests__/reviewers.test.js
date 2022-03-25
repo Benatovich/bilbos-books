@@ -126,7 +126,7 @@ describe('bilbos-books routes', () => {
     const res = await request(app)
       .delete(`/api/v1/reviewers/${reviewer.reviewer_id}`);
 
-
+    // console.log('test', res.body);
     expect(res.body).toEqual(reviewer);
     expect(await Reviewer.getById(reviewer.reviewer_id)).toBeNull();
 
