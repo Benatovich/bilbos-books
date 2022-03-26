@@ -35,6 +35,14 @@ state TEXT,
 country TEXT
 );
 
+DROP TABLE IF EXISTS reviewer CASCADE;
+
+CREATE TABLE reviewer (
+reviewer_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+name TEXT NOT NULL,
+company TEXT NOT NULL
+);
+
 DROP TABLE IF EXISTS review CASCADE;
 
 CREATE TABLE review (
@@ -46,13 +54,7 @@ CONSTRAINT rating CHECK (rating BETWEEN 1 AND 5),
 review VARCHAR (140) NOT NULL
 );
 
-DROP TABLE IF EXISTS reviewer CASCADE;
 
-CREATE TABLE reviewer (
-reviewer_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-name TEXT NOT NULL,
-company TEXT NOT NULL
-);
 
 INSERT INTO 
   author (name, dob, pob)
@@ -72,7 +74,8 @@ VALUES
 INSERT INTO
   reviewer (name, company)
 VALUES
-  ('Denzel', 'Most Books');
+  ('Denzel', 'Most Books'),
+  ('Jeff', 'No Books');
 
 INSERT INTO
   review (rating, reviewer_id, review, book_id)

@@ -39,6 +39,11 @@ describe('bilbos-books routes', () => {
         name: 'Denzel',
         company: 'Most Books',
       },
+      {
+        reviewer_id: expect.any(String),
+        name: 'Jeff',
+        company: 'No Books'
+      },
       { ...reviewer },
     ]);
   });
@@ -66,28 +71,31 @@ describe('bilbos-books routes', () => {
         name: 'Sam',
         company: 'No Books',
         reviewer_id: expect.any(String),
-        review: [{
-          review_id: '2',
-          rating: 3,
-          review: 'okay',
-          book_id: '1',
-          title: 'hi'
-        },
-        {
-          review_id: '3',
-          rating: 5,
-          review: 'book slaps',
-          book_id: '1',
-          title: 'hi'
-        }]
+        review: [
+          {
+            id: '3',
+            rating: 5,
+            review: 'book slaps',
+            book_id: '1',
+            title: 'hi'
+          }]
       },
     );
   });
 
   it('updates reviewer', async () => {
+    // insert a Reviewer whose reviewer_id should be 3
     const reviewer = await Reviewer.insert({
       name: 'Ryan',
       company: 'One Book'
+    });
+    
+    // insert a Review with a review_id of 2, book_id 1 should have the title "hi"
+    await Review.insert({
+      reviewer_id: '3',
+      book_id: '1',
+      rating: 3,
+      review: 'okay',
     });
 
     const res = await request(app)
@@ -95,16 +103,16 @@ describe('bilbos-books routes', () => {
       .send({
         company: 'Two Books'
       });
-   
+    
     const expected = {
       reviewer_id: expect.any(String),
       name: 'Ryan',
       company: 'Two Books',
       review: [{
-        review_id: '2',
+        id: '3',
+        book_id: '1',
         rating: 3,
         review: 'okay',
-        book_id: '1',
         title: 'hi'
       }]
 
@@ -118,17 +126,13 @@ describe('bilbos-books routes', () => {
   });
 
   it('deletes a reviewer if they have no reviews', async () => {
-    const reviewer = await Reviewer.insert({
-      name: 'Beth',
-      company: 'Books for Cats'
-    });
+
 
     const res = await request(app)
-      .delete(`/api/v1/reviewers/${reviewer.reviewer_id}`);
+      .delete('/api/v1/reviewers/1');
 
-    // console.log('test', res.body);
-    expect(res.body).toEqual(reviewer);
-    expect(await Reviewer.getById(reviewer.reviewer_id)).toBeNull();
+    expect(res.body.message).toEqual('reviewer with reviews can not be deleted');
+    
 
   });
 });
