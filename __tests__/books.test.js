@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Book = require('../lib/models/Book');
+const Review = require('../lib/models/Review');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -59,10 +60,28 @@ describe('bilbos-books routes', () => {
       title: 'hi',
       released: 1922,
       publisher_id: '1',
-      author: [{
-        author_id: '1',
-        name: 'ryan',
-      }],
+      author: [
+        {
+          author_id: '1',
+          name: 'ryan',
+        },
+      ],
+      reviews: [
+        {
+          id: '1',
+          rating: 1,
+          review: 'nice',
+          name: 'Denzel',
+          reviewer_id: '1',
+        },
+        {
+          id: '2',
+          rating: 3,
+          review: 'okay',
+          name: 'Jeff',
+          reviewer_id: '2',
+        },
+      ],
     });
   });
 });
