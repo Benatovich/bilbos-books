@@ -59,7 +59,10 @@ describe('bilbos-books routes', () => {
       book_id: '1',
       title: 'hi',
       released: 1922,
-      publisher_id: '1',
+      publisher: {
+        id: '1',
+        name: 'sam',
+      },
       author: [
         {
           author_id: '1',
