@@ -84,13 +84,11 @@ describe('bilbos-books routes', () => {
   });
 
   it('updates reviewer', async () => {
-    // insert a Reviewer whose reviewer_id should be 3
     const reviewer = await Reviewer.insert({
       name: 'Ryan',
       company: 'One Book'
     });
     
-    // insert a Review with a review_id of 2, book_id 1 should have the title "hi"
     await Review.insert({
       reviewer_id: '3',
       book_id: '1',
@@ -115,7 +113,6 @@ describe('bilbos-books routes', () => {
         review: 'okay',
         title: 'hi'
       }]
-
     };
       
     expect(res.body).toEqual(expected);
@@ -126,13 +123,9 @@ describe('bilbos-books routes', () => {
   });
 
   it('deletes a reviewer if they have no reviews', async () => {
-
-
     const res = await request(app)
       .delete('/api/v1/reviewers/1');
 
     expect(res.body.message).toEqual('reviewer with reviews can not be deleted');
-    
-
   });
 });
