@@ -71,15 +71,19 @@ describe('bilbos-books routes', () => {
           id: '1',
           rating: 1,
           review: 'nice',
-          name: 'Denzel',
-          reviewer_id: '1',
+          reviewer: {
+            name: 'Denzel',
+            id: '1',
+          },
         },
         {
           id: '2',
           rating: 3,
           review: 'okay',
-          name: 'Jeff',
-          reviewer_id: '2',
+          reviewer: {
+            name: 'Jeff',
+            id: '2',
+          },
         },
       ],
     });
