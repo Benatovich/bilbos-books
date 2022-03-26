@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Publisher = require('../lib/models/Publisher');
+const Book = require('../lib/models/Book');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -43,12 +44,12 @@ describe('bilbos-books routes', () => {
     expect(res.body).toEqual([
       {
         publisher_id: expect.any(String),
-        name: 'sam'
+        name: 'sam',
       },
       {
         publisher_id: expect.any(String),
-        name: 'Hank'
-      }
+        name: 'Hank',
+      },
     ]);
   });
 
@@ -58,18 +59,30 @@ describe('bilbos-books routes', () => {
       city: 'Buffalo',
       state: 'New York',
       country: 'US',
-      // books: [
-      //   {
-      //     book_id: 1,
-      //     title: 'book',
-      //   },
-      // ],
+    });
+
+    const book = await Book.insert({
+      publisher_id: 2,
+      title: 'Invisible Monsters',
+      released: 2000,
     });
 
     const res = await request(app).get(
       `/api/v1/publishers/${expected.publisher_id}`
     );
 
-    expect(res.body).toEqual(expected);
+    expect(res.body).toEqual({
+      publisher_id: '2',
+      name: 'Hank',
+      city: 'Buffalo',
+      state: 'New York',
+      country: 'US',
+      books: [
+        {
+          id: '2',
+          title: 'Invisible Monsters',
+        },
+      ],
+    });
   });
 });
