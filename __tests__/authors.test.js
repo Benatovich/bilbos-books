@@ -50,20 +50,34 @@ describe('bilbos-books routes', () => {
   });
 
   it('should be able to get a single instance of Author by id from authors', async () => {
-    // TODO: account for books
-    const author = await Author.insert({
-      name: 'Chuck Palahniuk',
-      dob: '4/3/1992',
-      pob: 'Portland, OR',
-    });
+    // const author = await Author.insert({
+    //   name: 'Chuck Palahniuk',
+    //   dob: '4/3/1992',
+    //   pob: 'Portland, OR',
+    // });
 
-    await Book.insert({
-      title: 'fight club',
-      released: 1996
-    });
+    // await Book.insert({
+    //   title: 'fight club',
+    //   released: 1996,
+    //   publisher_id: '1'
+    // });
 
-    const res = await request(app).get(`/api/v1/authors/${author.author_id}`);
+    const res = await request(app).get('/api/v1/authors/1');
 
-    expect(res.body).toEqual(author);
+    expect(res.body).toEqual(
+      {
+        author_id: expect.any(String),
+        name: 'ryan',
+        dob: '4/3/1992',
+        pob: 'portland',
+        book: [
+          {
+            id: expect.any(String),
+            title: 'hi',
+            released: 1922,
+          }
+        ]
+      }
+    );
   });
 });

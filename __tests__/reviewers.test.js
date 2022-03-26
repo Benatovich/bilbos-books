@@ -73,7 +73,7 @@ describe('bilbos-books routes', () => {
         reviewer_id: expect.any(String),
         review: [
           {
-            review_id: '3',
+            id: '3',
             rating: 5,
             review: 'book slaps',
             book_id: '1',
@@ -109,7 +109,7 @@ describe('bilbos-books routes', () => {
       name: 'Ryan',
       company: 'Two Books',
       review: [{
-        review_id: '3',
+        id: '3',
         book_id: '1',
         rating: 3,
         review: 'okay',

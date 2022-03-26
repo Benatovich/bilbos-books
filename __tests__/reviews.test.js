@@ -26,7 +26,7 @@ describe('bilbos-books routes', () => {
     expect(res.body).toEqual({ review_id: expect.any(String), ...review });
   });
 
-  it.only('should list all reviews up to the top 100', async () => {
+  it('should list all reviews up to the top 100', async () => {
     const review = await Review.insert({
       reviewer_id: '1',
       book_id: '1',
