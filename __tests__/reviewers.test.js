@@ -48,7 +48,7 @@ describe('bilbos-books routes', () => {
     ]);
   });
 
-  it.only('gets a reviewer by id', async () => {
+  it('gets a reviewer by id', async () => {
     const reviewer = await Reviewer.insert({
       name: 'Sam',
       company: 'No Books',

@@ -26,7 +26,7 @@ describe('bilbos-books routes', () => {
     expect(res.body).toEqual({ review_id: expect.any(String), ...review });
   });
 
-  it('should list all reviews up to the top 100', async () => {
+  it.only('should list all reviews up to the top 100', async () => {
     const review = await Review.insert({
       reviewer_id: '1',
       book_id: '1',
@@ -41,7 +41,7 @@ describe('bilbos-books routes', () => {
       {
         review_id: expect.any(String),
         rating: 3,
-        reviewer_id: '2',
+        reviewer_id: expect.any(String),
         review: 'okay',
         book_id: '1',
       },
@@ -56,7 +56,7 @@ describe('bilbos-books routes', () => {
 
     for (let i = 0; i < 101; i++) {
       await Review.insert({
-        reviewer_id: '3',
+        reviewer_id: '1',
         book_id: '1',
         rating: 2,
         review: 'This book sucked! Boo :(',
