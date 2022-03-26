@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Author = require('../lib/models/Author');
-const Book = require('../lib/models/Book');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -50,18 +49,6 @@ describe('bilbos-books routes', () => {
   });
 
   it('should be able to get a single instance of Author by id from authors', async () => {
-    // const author = await Author.insert({
-    //   name: 'Chuck Palahniuk',
-    //   dob: '4/3/1992',
-    //   pob: 'Portland, OR',
-    // });
-
-    // await Book.insert({
-    //   title: 'fight club',
-    //   released: 1996,
-    //   publisher_id: '1'
-    // });
-
     const res = await request(app).get('/api/v1/authors/1');
 
     expect(res.body).toEqual(

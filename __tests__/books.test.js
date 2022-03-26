@@ -59,12 +59,10 @@ describe('bilbos-books routes', () => {
       title: 'hi',
       released: 1922,
       publisher_id: '1',
-      author: [
-        {
-          author_id: '1',
-          name: 'ryan',
-        },
-      ],
+      author: [{
+        author_id: '1',
+        name: 'ryan',
+      }],
     });
   });
 });
