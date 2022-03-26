@@ -51,20 +51,17 @@ describe('bilbos-books routes', () => {
   it('should be able to get a single instance of Author by id from authors', async () => {
     const res = await request(app).get('/api/v1/authors/1');
 
-    expect(res.body).toEqual(
-      {
-        author_id: expect.any(String),
-        name: 'ryan',
-        dob: '4/3/1992',
-        pob: 'portland',
-        book: [
-          {
-            id: expect.any(String),
-            title: 'hi',
-            released: 1922,
-          }
-        ]
-      }
-    );
+    expect(res.body).toEqual({
+      name: 'ryan',
+      dob: '4/3/1992',
+      pob: 'portland',
+      book: [
+        {
+          id: expect.any(String),
+          title: 'hi',
+          released: 1922,
+        },
+      ],
+    });
   });
 });

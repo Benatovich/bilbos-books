@@ -56,7 +56,6 @@ describe('bilbos-books routes', () => {
     const res = await request(app).get('/api/v1/books/1');
 
     expect(res.body).toEqual({
-      book_id: '1',
       title: 'hi',
       released: 1922,
       publisher: {
