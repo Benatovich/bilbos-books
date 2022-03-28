@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Book = require('../lib/models/Book');
+const Review = require('../lib/models/Review');
 
 describe('bilbos-books routes', () => {
   beforeEach(() => {
@@ -55,14 +56,38 @@ describe('bilbos-books routes', () => {
     const res = await request(app).get('/api/v1/books/1');
 
     expect(res.body).toEqual({
-      book_id: '1',
       title: 'hi',
       released: 1922,
-      publisher_id: '1',
-      author: [{
-        author_id: '1',
-        name: 'ryan',
-      }],
+      publisher: {
+        id: '1',
+        name: 'sam',
+      },
+      author: [
+        {
+          author_id: '1',
+          name: 'ryan',
+        },
+      ],
+      reviews: [
+        {
+          id: '1',
+          rating: 1,
+          review: 'nice',
+          reviewer: {
+            name: 'Denzel',
+            id: '1',
+          },
+        },
+        {
+          id: '2',
+          rating: 3,
+          review: 'okay',
+          reviewer: {
+            name: 'Jeff',
+            id: '2',
+          },
+        },
+      ],
     });
   });
 });
