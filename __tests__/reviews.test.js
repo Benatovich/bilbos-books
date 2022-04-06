@@ -27,7 +27,6 @@ describe('bilbos-books routes', () => {
   });
 
   it('should list all reviews up to the top 100', async () => {
-
     const res = await request(app).get('/api/v1/reviews');
 
     expect(res.body).toEqual([
@@ -36,12 +35,14 @@ describe('bilbos-books routes', () => {
         rating: 3,
         review: 'okay',
         book_id: '1',
+        title: 'hi',
       },
       {
         review_id: expect.any(String),
         rating: 1,
         review: 'nice',
         book_id: '1',
+        title: 'hi',
       },
     ]);
 
