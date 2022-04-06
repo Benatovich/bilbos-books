@@ -27,28 +27,19 @@ describe('bilbos-books routes', () => {
   });
 
   it('should list all reviews up to the top 100', async () => {
-    const review = await Review.insert({
-      reviewer_id: '1',
-      book_id: '1',
-      rating: 5,
-      review: 'This was the best book I have ever read!',
-    });
 
     const res = await request(app).get('/api/v1/reviews');
 
     expect(res.body).toEqual([
-      { ...review },
       {
         review_id: expect.any(String),
         rating: 3,
-        reviewer_id: expect.any(String),
         review: 'okay',
         book_id: '1',
       },
       {
         review_id: expect.any(String),
         rating: 1,
-        reviewer_id: '1',
         review: 'nice',
         book_id: '1',
       },
